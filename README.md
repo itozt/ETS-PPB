@@ -1,158 +1,48 @@
-﻿# ETS-PPB - Aplikasi Pengelola Tugas Harian
+﻿# To-Do Planner
 
-Dokumen ini adalah rencana implementasi final berdasarkan requirement yang sudah dikunci.
+**To-Do Planner** adalah aplikasi pengelola tugas dan jadwal harian bergaya modern yang dirancang untuk mempermudah produktivitas Anda. Dibangun sepenuhnya menggunakan teknologi modern Android (**Jetpack Compose**), aplikasi ini menawarkan pengalaman navigasi dan interaksi antarmuka yang sangat responsif, mulus, dan intuitif.
 
-## Keputusan Requirement (Final)
+## Fitur Utama
 
-1. UI: Jetpack Compose penuh (modern)
-2. Deadline: tanggal dan jam, keduanya opsional
-3. Prioritas: tidak digunakan
-4. Filter: All, Active, Completed
-5. Sorting utama: deadline terdekat
-6. Hapus tugas: swipe untuk menampilkan aksi hapus + Undo via Snackbar
-7. Penyimpanan: local-only (tanpa sinkronisasi cloud)
-8. SDK: minSdk 24 (sesuai konfigurasi project saat ini)
-9. Bahasa aplikasi: Indonesia
+1. **Navigasi Mulus Berbasis Swipe**
+   - Transisi menu antara **Daftar Tugas (Tasks)** dan **Kalender (Calendar)** dapat dilakukan dengan usapan (swipe) layar (menggunakan HorizontalPager).
+   - Tampilan Kalender juga mendukung *swipe* ke kanan dan ke kiri untuk berpindah bulan secara instan.
 
-## Arsitektur
+2. **Daftar Tugas Cerdas (Smart Task List)**
+   - Daftar tugas secara otomatis dikelompokkan berdasarkan kategori waktu: **Lewat Waktu, Hari Ini, Besok, Lusa, dan Tanpa Tenggat**.
+   - Grup **Lewat Waktu** eksklusif hanya menampilkan tugas yang belum diselesaikan (melewati tenggat waktu).
+   - Kategori **Tanpa Tenggat** terbuka secara otomatis (expanded by default) agar daftar tugas tak berwaktu bisa langsung terlihat.
+   - Pilihan untuk menyembunyikan atau menampilkan daftar tugas yang sudah *Selesai*.
 
-Mengikuti layer yang sudah direncanakan:
+3. **Kalender Interaktif**
+   - Tampilan kalender *grid* bulanan dengan indikator visual (titik penanda) pada hari-hari yang memiliki tugas.
+   - Menampilkan daftar tugas spesifik pada tanggal yang dipilih.
+   - Dilengkapi tombol penambahan instan (+) pada tampilan daftar kalender, yang otomatis mendeteksi tanggal yang sedang dipilih.
 
-- UI Layer (Compose + Navigation)
-- ViewModel Layer
-- Repository Layer (single source of truth)
-- Data Layer (Room)
+4. **Manajemen Tugas Lanjutan (Recurring Tasks)**
+   - Mendukung rentang *tenggat waktu* berbasis Tanggal dan Jam secara spesifik.
+   - **Tugas Berulang (Repeat)**: Opsi otomatisasi penyalinan tugas secara Harian, Mingguan, Bulanan, maupun **Hari Kustom** (misalnya setiap Senin & Rabu).
+   - Kontrol kustom untuk batas waktu berulang (contoh: diulang sebanyak *n* kali, atau otomatis berakhir pada 31 Desember tahun ini).
+   - Fitur edit untuk mengubah judul, rincian catatan, atau tanggal tanpa mengganggu perulangan sebelumnya.
 
-Alur data: Room -> Repository -> ViewModel -> UI (reactive via Flow/StateFlow)
+5. **Interaksi Modern**
+   - Mendukung gesture geser (swipe-to-delete) untuk menghapus tugas, lengkap dengan fitur pembatalan (*Undo*) via Snackbar.
+   - Splash Screen estetik di awal peluncuran dengan logo eksklusif aplikasi.
+   - Ukuran *Card* tugas lebih ringkas dan hemat ruang layar namun tetap menjaga estetika jarak *(spacing)* tipografi.
 
-## Struktur Paket yang Disarankan
+## Teknologi & Arsitektur (Tech Stack)
 
-```text
-com.example.todolist
-|- data
-|  |- local
-|  |  |- entity
-|  |  |- dao
-|  |  |- db
-|  |- repository
-|- domain
-|  |- model
-|  |- usecase (opsional)
-|- ui
-|  |- navigation
-|  |- tasklist
-|  |- addedit
-|  |- components
-|  |- theme
-|- viewmodel
-|- util
-```
+Aplikasi ini diimplementasikan menggunakan arsitektur **MVVM (Model-View-ViewModel)** dengan struktur lapisan (layering) yang optimal:
 
-## Model Data (MVP)
+- **UI Layer**: Jetpack Compose, Material 3, Navigation & Foundation Pager.
+- **ViewModel Layer**: State manajemen dinamis dengan StateFlow dan ViewModel.
+- **Repository Layer**: Lapisan abstraksi data (TaskRepository).
+- **Data Layer**: Room Database (SQLite) terintegrasi menggunakan Coroutines yang menangani pengelolaan database relasional secara lokal (Local Storage) dan aman.
 
-Entity `Task`:
+## Persyaratan Sistem
 
-- id: Long (autoGenerate)
-- title: String
-- notes: String? (opsional)
-- deadlineMillis: Long? (opsional, menyimpan tanggal+jam)
-- isDone: Boolean
-- createdAtMillis: Long
-- updatedAtMillis: Long
+- Diperlukan minimum versi **SDK 24 (Android 7.0 Nougat)**.
+- Desain aplikasi dioptimalkan untuk bahasa antarmuka **Indonesia**.
 
-Catatan:
-
-- Deadline kosong dianggap "tanpa deadline".
-- Untuk sorting deadline terdekat, item dengan deadline null ditempatkan di bawah.
-
-## Fitur MVP
-
-1. Tambah tugas baru
-2. Tampilkan daftar tugas
-3. Tandai tugas selesai/belum selesai
-4. Filter All / Active / Completed
-5. Sorting deadline terdekat
-6. Swipe item untuk memunculkan aksi Hapus
-7. Undo hapus lewat Snackbar
-8. Persisten lokal dengan Room
-
-## Rencana Implementasi Bertahap
-
-### Tahap 1 - Setup fondasi
-
-- Tambah dependencies: Room, Lifecycle ViewModel Compose, Navigation Compose, Coroutines
-- Siapkan package structure
-- Buat baseline theme dan scaffold utama
-
-### Tahap 2 - Data Layer (Room)
-
-- Buat `TaskEntity`
-- Buat `TaskDao`:
-  - observeAll()
-  - insert(task)
-  - update(task)
-  - delete(task)
-- Buat `AppDatabase`
-
-### Tahap 3 - Repository Layer
-
-- Interface `TaskRepository`
-- Implementasi `TaskRepositoryImpl`
-- Expose stream data dan operasi CRUD
-- Tambah logic sorting deadline terdekat
-
-### Tahap 4 - ViewModel Layer
-
-- `TaskViewModel` dengan `StateFlow` untuk:
-  - list tugas
-  - filter aktif
-  - event UI (add, toggle done, delete, undo)
-- Gunakan `SavedStateHandle` jika diperlukan untuk menjaga state sederhana
-
-### Tahap 5 - UI Compose
-
-- Navigation host
-- Screen daftar tugas:
-  - Top app bar
-  - Filter chips (All/Active/Completed)
-  - LazyColumn daftar tugas
-  - FAB tambah tugas
-- Swipe-to-action delete + Snackbar Undo
-- Dialog/screen tambah tugas (judul wajib, deadline opsional)
-
-### Tahap 6 - Testing
-
-- Unit test ViewModel (filter, add, toggle, delete, undo)
-- Instrumented test DAO dasar (insert/update/delete/query)
-
-## Detail UX yang Disepakati
-
-- Title wajib diisi
-- Deadline opsional (bisa kosong)
-- Format tanggal/jam lokal Indonesia
-- Snackbar: "Tugas dihapus" + aksi "Batal"
-- Empty state yang informatif ketika daftar kosong
-
-## Milestone Praktis (5 Hari)
-
-1. Hari 1: setup dependency + data layer selesai
-2. Hari 2: repository + viewmodel dasar
-3. Hari 3: UI task list + filter + sorting
-4. Hari 4: add task + swipe delete + undo snackbar
-5. Hari 5: testing + polish UI + bug fixing
-
-## Risiko dan Mitigasi
-
-- Null deadline memengaruhi urutan:
-  - Mitigasi: aturan sorting eksplisit (null di paling bawah)
-- State UI tidak sinkron saat undo:
-  - Mitigasi: event channel satu arah + id snapshot item yang dihapus
-- Kompleksitas swipe behavior di Compose:
-  - Mitigasi: mulai dari API swipe stabil yang tersedia di Material3/Compose foundation sesuai versi
-
-## Definisi Selesai (MVP Done)
-
-- Semua fitur MVP berjalan di perangkat/emulator minSdk 24
-- Tidak crash pada flow utama: tambah, centang selesai, filter, hapus, undo
-- Data tetap tersimpan setelah app ditutup dan dibuka kembali
-- Minimal test dasar untuk DAO dan ViewModel lulus
+---
+*Dibuat untuk evaluasi ETS Pemrograman Perangkat Bergerak. Selamat mengatur jadwal dan tingkatkan produktivitas harian Anda.*
