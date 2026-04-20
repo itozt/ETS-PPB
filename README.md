@@ -5,12 +5,9 @@
 <h1 align="center">To-Do Planner</h1>
 
 <p align="center">
-  <a href="https://github.com/azharax/ETS-PPB/releases/latest">
-    <img src="https://img.shields.io/github/v/tag/azharax/ETS-PPB?color=brightgreen&label=version&style=for-the-badge" alt="Latest Version">
-  </a>
-  <a href="https://github.com/azharax/ETS-PPB/releases/latest/download/todoplanner_v1.0.0.apk">
-    <img src="https://img.shields.io/badge/download_apk-blue?style=for-the-badge&logo=android" alt="Download APK">
-  </a>
+  <a href="https://github.com/azharax/ETS-PPB/releases/latest"><img src="https://img.shields.io/github/v/tag/azharax/ETS-PPB?color=brightgreen&label=version&style=for-the-badge" alt="Latest Version"></a>
+  &nbsp;
+  <a href="https://github.com/azharax/ETS-PPB/releases/latest/download/todoplanner_v1.0.0.apk"><img src="https://img.shields.io/badge/download_apk-blue?style=for-the-badge&logo=android" alt="Download APK"></a>
 </p>
 
 > Aplikasi pengelola tugas dan jadwal harian bergaya modern yang dirancang untuk mempermudah produktivitas Anda, dibangun sepenuhnya menggunakan teknologi Jetpack Compose.
