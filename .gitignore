@@ -13,3 +13,13 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Backup and temporary files
+*_BACKUP.kt
+AddTaskDialog2.kt
+AddTaskDialogBahasa.kt
+AddTaskDialogClean.kt
+cleanup*.py
+cleanup*.bat
+remove_*.py
+delete_*.py
