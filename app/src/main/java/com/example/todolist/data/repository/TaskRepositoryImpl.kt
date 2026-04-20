@@ -66,9 +66,7 @@ private fun TaskEntity.toDomain(): Task {
         createdAtMillis = createdAtMillis,
         updatedAtMillis = updatedAtMillis,
         repeatMode = repeatMode,
-        repeatDays = repeatDays,
-        groupId = groupId,
-        isImportant = isImportant
+        repeatDays = repeatDays
     )
 }
 
@@ -83,8 +81,6 @@ private fun Task.toEntity(): TaskEntity {
         createdAtMillis = createdAtMillis,
         updatedAtMillis = updatedAtMillis,
         repeatMode = repeatMode,
-        repeatDays = repeatDays,
-        groupId = groupId,
-        isImportant = isImportant
+        repeatDays = repeatDays
     )
 }

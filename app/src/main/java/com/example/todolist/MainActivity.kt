@@ -82,8 +82,8 @@ fun MainScreen() {
                 tonalElevation = 8.dp
             ) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Tugas") },
-                    label = { Text("Tugas") },
+                    icon = { Icon(Icons.AutoMirrored.Filled.List, contentDescription = "Tasks") },
+                    label = { Text("Tasks") },
                     selected = pagerState.currentPage == 0,
                     onClick = {
                         coroutineScope.launch {
@@ -92,8 +92,8 @@ fun MainScreen() {
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.DateRange, contentDescription = "Kalender") },
-                    label = { Text("Kalender") },
+                    icon = { Icon(Icons.Default.DateRange, contentDescription = "Calendar") },
+                    label = { Text("Calendar") },
                     selected = pagerState.currentPage == 1,
                     onClick = {
                         coroutineScope.launch {
@@ -121,12 +121,9 @@ fun MainScreen() {
                 CalendarScreen(
                     tasks = uiState.tasks,
                     onTaskCheckedChange = taskListViewModel::onTaskCheckedChanged,
-                    onToggleFlagTask = { task: Task, isImportant: Boolean ->
-                        taskListViewModel.editTask(task.copy(isImportant = isImportant))
-                    },
                     onDeleteTask = taskListViewModel::deleteTask,
                     onEditTask = taskListViewModel::editTask,
-                    onAddTask = { title: String, notes: String?, deadlineMillis: Long?, deadlineHasTime: Boolean, repeatMode: com.example.todolist.domain.model.RepeatMode, repeatDays: String?, repeatCount: Int? ->
+                    onAddTask = { title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount ->
                         taskListViewModel.addTask(title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount)
                     }
                 )
@@ -152,9 +149,6 @@ fun ToDoListApp() {
         showCompleted = uiState.showCompleted,
         onToggleShowCompleted = taskListViewModel::toggleShowCompleted,
         onTaskCheckedChange = taskListViewModel::onTaskCheckedChanged,
-        onToggleFlagTask = { task, isImportant ->
-            taskListViewModel.editTask(task.copy(isImportant = isImportant))
-        },
         onAddTask = { title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount -> taskListViewModel.addTask(title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount) },
         onEditTask = taskListViewModel::editTask,
         onDeleteTask = taskListViewModel::deleteTask,

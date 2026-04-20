@@ -7,7 +7,7 @@ import com.example.todolist.data.local.entity.TaskEntity
 
 @Database(
     entities = [TaskEntity::class],
-    version = 5,
+    version = 4,
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {

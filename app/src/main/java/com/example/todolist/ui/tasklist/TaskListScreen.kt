@@ -23,8 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Flag
-import androidx.compose.material.icons.outlined.Flag
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.MoreVert
@@ -88,7 +86,6 @@ fun TaskListScreen(
     showCompleted: Boolean = false,
     onToggleShowCompleted: () -> Unit = {},
     onTaskCheckedChange: (Task, Boolean) -> Unit = { _, _ -> },
-    onToggleFlagTask: (Task, Boolean) -> Unit = { _, _ -> },
         onAddTask: (
         title: String,
         notes: String?,
@@ -116,12 +113,7 @@ fun TaskListScreen(
                 showAddDialog = false
                 taskToEdit = null
             },
-            onDelete = { task ->
-                onDeleteTask(task)
-                showAddDialog = false
-                taskToEdit = null
-            },
-            onSave = { title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount ->
+                                    onSave = { title, notes, deadlineMillis, deadlineHasTime, repeatMode, repeatDays, repeatCount ->
                 if (taskToEdit != null) {
                     onEditTask(
                         taskToEdit!!.copy(
@@ -196,7 +188,6 @@ fun TaskListScreen(
             groupedTasks = groupedTasks,
             innerPadding = innerPadding,
             onTaskCheckedChange = onTaskCheckedChange,
-            onToggleFlagTask = onToggleFlagTask,
             onEditTask = { task -> taskToEdit = task },
             onDeleteTask = { task ->
                 scope.launch {
@@ -221,7 +212,6 @@ private fun TaskListContent(
     groupedTasks: List<TaskGroup> = emptyList(),
     innerPadding: PaddingValues,
     onTaskCheckedChange: (Task, Boolean) -> Unit,
-    onToggleFlagTask: (Task, Boolean) -> Unit,
     onEditTask: (Task) -> Unit,
     onDeleteTask: (Task) -> Unit
 ) {
@@ -234,7 +224,7 @@ private fun TaskListContent(
             .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        if (groupedTasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             Box(modifier = Modifier.fillMaxWidth()) {
                 Text(
                     text = stringResource(id = R.string.empty_tugas),
@@ -279,9 +269,6 @@ private fun TaskListContent(
                                 onCheckedChange = { checked ->
                                     onTaskCheckedChange(task, checked)
                                 },
-                                onFlagChange = { isImportant ->
-                                    onToggleFlagTask(task, isImportant)
-                                },
                                 onEdit = { onEditTask(task) },
                                 onDelete = { onDeleteTask(task) }
                             )
@@ -298,7 +285,6 @@ private fun TaskListContent(
 fun TaskItem(
     task: Task,
     onCheckedChange: (Boolean) -> Unit,
-    onFlagChange: (Boolean) -> Unit = {},
     onEdit: () -> Unit = {},
     onDelete: () -> Unit
 ) {
@@ -400,16 +386,6 @@ fun TaskItem(
                         text = deadlineText,
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary
-                    )
-                }
-                androidx.compose.material3.IconButton(
-                    onClick = { onFlagChange(!task.isImportant) },
-                    modifier = Modifier.padding(end = 4.dp)
-                ) {
-                    Icon(
-                        imageVector = if (task.isImportant) Icons.Filled.Flag else Icons.Outlined.Flag,
-                        contentDescription = stringResource(id = R.string.tandai_penting),
-                        tint = if (task.isImportant) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
             }

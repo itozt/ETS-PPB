@@ -1,52 +1,62 @@
-﻿# To-Do Planner
-
 <p align="center">
-  <img src="app/src/main/res/drawable/task_planner_logo.png" alt="To-Do Planner Logo" width="250" style="background-color: white; padding: 60px 25%; border-radius: 12px;">
+  <img name="download-badge" src="app/src/main/res/drawable/task_planner_logo.png" alt="To-Do Planner Logo" width="250" style="background-color: white; padding: 60px 25%; border-radius: 12px;">
 </p>
 
-**To-Do Planner** adalah aplikasi pengelola tugas dan jadwal harian bergaya modern yang dirancang untuk mempermudah produktivitas Anda. Dibangun sepenuhnya menggunakan teknologi modern Android (**Jetpack Compose**), aplikasi ini menawarkan pengalaman navigasi dan interaksi antarmuka yang sangat responsif, mulus, dan intuitif.
+<h1 align="center">To-Do Planner</h1>
 
-## Fitur Utama
+<p align="center">
+  <a href="https://github.com/azharax/ETS-PPB/releases/latest"><img src="https://img.shields.io/github/v/tag/azharax/ETS-PPB?color=brightgreen&label=version&style=for-the-badge" alt="Latest Version"></a>
+  &nbsp;
+  <a href="https://github.com/azharax/ETS-PPB/releases/latest/download/todoplanner_v1.0.0.apk"><img src="https://img.shields.io/badge/download_apk-blue?style=for-the-badge&logo=android" alt="Download APK"></a>
+</p>
 
-1. **Navigasi Mulus Berbasis Swipe**
-   - Transisi menu antara **Daftar Tugas (Tasks)** dan **Kalender (Calendar)** dapat dilakukan dengan usapan (swipe) layar (menggunakan HorizontalPager).
-   - Tampilan Kalender juga mendukung *swipe* ke kanan dan ke kiri untuk berpindah bulan secara instan.
+> Aplikasi pengelola tugas dan jadwal harian bergaya modern yang dirancang untuk mempermudah produktivitas Anda, dibangun sepenuhnya menggunakan teknologi Jetpack Compose.
 
-2. **Daftar Tugas Cerdas (Smart Task List)**
-   - Daftar tugas secara otomatis dikelompokkan berdasarkan kategori waktu: **Lewat Waktu, Hari Ini, Besok, Lusa, dan Tanpa Tenggat**.
-   - Grup **Lewat Waktu** eksklusif hanya menampilkan tugas yang belum diselesaikan (melewati tenggat waktu).
-   - Kategori **Tanpa Tenggat** terbuka secara otomatis (expanded by default) agar daftar tugas tak berwaktu bisa langsung terlihat.
-   - Pilihan untuk menyembunyikan atau menampilkan daftar tugas yang sudah *Selesai*.
+## 📖 Tentang
+**To-Do Planner** adalah solusi produktivitas lengkap untuk mencatat, menjadwalkan, dan melacak daftar pekerjaan sehari-hari. Aplikasi ini dikembangkan untuk memberikan pengalaman navigasi yang sangat responsif, mulus, dan intuitif melalui gestur *swipe*, sekaligus memastikan mobilitas yang terjamin amannya lewat penyimpanan **secara offline di perangkat**. Dibuat khusus dan dioptimalkan sebagai pemenuhan evaluasi project ETS Pemrograman Perangkat Bergerak.
 
-3. **Kalender Interaktif**
-   - Tampilan kalender *grid* bulanan dengan indikator visual (titik penanda) pada hari-hari yang memiliki tugas.
-   - Menampilkan daftar tugas spesifik pada tanggal yang dipilih.
-   - Dilengkapi tombol penambahan instan (+) pada tampilan daftar kalender, yang otomatis mendeteksi tanggal yang sedang dipilih.
+## ✨ Fitur Utama
+- **Navigasi Cepat Berbasis Swipe:** Transisi mulus antara layar **Daftar Tugas** dan **Kalender** menggunakan HorizontalPager yang intuitif.
+- **Daftar Tugas Cerdas:** Memisahkan tugas secara otomatis (*Lewat Waktu, Hari Ini, Besok, Lusa, Tanpa Tenggat*).
+- **Kalender Interaktif:** Kalender visual bulanan interaktif dengan titik penanda sebagai representatif hari-hari yang memiliki daftar tugas.
+- **Manajemen Penjadwalan Lanjut:** Dilengkapi opsi penentuan opsi tanggal dan jam, termasuk **Tugas Berulang** (Harian, Mingguan, Bulanan, hingga Kustom hari spesifik) dengan pengaturan batas tamat fitur berulang yang luar biasa fleksibel.
+- **Interaksi Material Design 3:** Menghapus tugas lebih instan dengan di-*swipe*, mendukung notifikasi balikan pembatalan (*Undo* Snackbar).
+- **Estetika Antarmuka Penuh:** Animasi *Splash Screen* logo di awal pembukaan, resolusi UI kartu/papan daftar yang hemat *spaces* dan ramah memori otak.
 
-4. **Manajemen Tugas Lanjutan (Recurring Tasks)**
-   - Mendukung rentang *tenggat waktu* berbasis Tanggal dan Jam secara spesifik.
-   - **Tugas Berulang (Repeat)**: Opsi otomatisasi penyalinan tugas secara Harian, Mingguan, Bulanan, maupun **Hari Kustom** (misalnya setiap Senin & Rabu).
-   - Kontrol kustom untuk batas waktu berulang (contoh: diulang sebanyak *n* kali, atau otomatis berakhir pada 31 Desember tahun ini).
-   - Fitur edit untuk mengubah judul, rincian catatan, atau tanggal tanpa mengganggu perulangan sebelumnya.
+## 📱 Screenshot Terkini
+| Daftar Tugas (Tasks) | Kalender Terintegrasi (Calendar) |
+| :---: | :---: |
+| <img src="assets/img-tasks.jpg" width="250"> | <img src="assets/img-kalender.jpg" width="250"> |
 
-5. **Interaksi Modern**
-   - Mendukung gesture geser (swipe-to-delete) untuk menghapus tugas, lengkap dengan fitur pembatalan (*Undo*) via Snackbar.
-   - Splash Screen estetik di awal peluncuran dengan logo eksklusif aplikasi.
-   - Ukuran *Card* tugas lebih ringkas dan hemat ruang layar namun tetap menjaga estetika jarak *(spacing)* tipografi.
+## 📥 Download APK
+Anda dapat melihat semua versi aplikasi yang pernah dirilis melalui halaman **GitHub Releases**. Di sini, Anda juga bisa mengunduh versi terbaru aplikasi dengan mudah.
 
-## Teknologi & Arsitektur (Tech Stack)
+👉 **[Lihat Semua Versi Rilis](https://github.com/azharax/ETS-PPB/releases)**
 
-Aplikasi ini diimplementasikan menggunakan arsitektur **MVVM (Model-View-ViewModel)** dengan struktur lapisan (layering) yang optimal:
+Untuk mengunduh **APK stabil terbaru**, silakan klik tombol di bawah ini:
 
-- **UI Layer**: Jetpack Compose, Material 3, Navigation & Foundation Pager.
-- **ViewModel Layer**: State manajemen dinamis dengan StateFlow dan ViewModel.
-- **Repository Layer**: Lapisan abstraksi data (TaskRepository).
-- **Data Layer**: Room Database (SQLite) terintegrasi menggunakan Coroutines yang menangani pengelolaan database relasional secara lokal (Local Storage) dan aman.
+⬇️ **[Download APK Terbaru](#download-badge)**
 
-## Persyaratan Sistem
+## ⚙️ Petunjuk Instalasi
+1. Unduh bundle apk dari tautan di atas.
+2. Buka paket instaler yang terunduh tersebut di dalam perangkat Android Anda.
+3. Apabila muncul peringatan keamanan sistem, mohon izinkan penginstalan dari **Sumber Tidak Dikenal (Unknown Sources)** pada pengaturan keamanan ponsel.
+4. Lanjutkan instruksi di layar instalasi, tunggu sampai jadi, dan aplikasi siap digunakan!
 
-- Diperlukan minimum versi **SDK 24 (Android 7.0 Nougat)**.
-- Desain aplikasi dioptimalkan untuk bahasa antarmuka **Indonesia**.
+## 🛠️ Stack Teknologi & Arsitektur
+Dibuat dengan mematuhi pattern asitektur masa kini, yakni **MVVM (Model-View-ViewModel)** dengan spesifikasi berikut:
+- **Bahasa Independen:** Kotlin
+- **UI & Layouting:** Jetpack Compose (Material 3)
+- **Reactivity & Threading:** Kotlin Coroutines beserta StateFlow Flow
+- **Lapisan Penyimpanan:** Room Database SQLite (Local Storage)
 
----
-*Dibuat untuk evaluasi ETS Pemrograman Perangkat Bergerak. Selamat mengatur jadwal dan tingkatkan produktivitas harian Anda.*
+## 📝 Changelog / Catatan Rilis
+### v1.0.0 (Rilis Publik)
+- Daftar tugas otomatis dikelompokkan berdasarkan waktu: lewat waktu, hari ini, besok, lusa, dan tanpa tenggat.
+- Kalender interaktif dengan penanda tugas pada tanggal tertentu.
+- Dukungan tugas berulang harian, mingguan, bulanan, atau hari tertentu.
+- Bisa edit tugas kapan saja.
+- Hapus tugas dengan swipe, lalu bisa dibatalkan lewat undo.
+- Tampilan modern, ringan, dan nyaman dipakai.
+
+

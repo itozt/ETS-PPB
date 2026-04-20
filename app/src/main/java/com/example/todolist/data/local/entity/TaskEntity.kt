@@ -16,6 +16,5 @@ data class TaskEntity(
     val updatedAtMillis: Long,
     val repeatMode: RepeatMode = RepeatMode.NONE,
     val repeatDays: String? = null,
-    val groupId: String? = null,
-    val isImportant: Boolean = false
+    val groupId: String? = null
 )
