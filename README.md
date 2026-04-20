@@ -38,7 +38,7 @@ Untuk mengunduh **APK stabil terbaru**, silakan klik tombol di bawah ini:
 ⬇️ **[Download APK Terbaru](#download-badge)**
 
 ## ⚙️ Petunjuk Instalasi
-1. Unduh bundle app-release.apk dari tautan di atas.
+1. Unduh bundle apk dari tautan di atas.
 2. Buka paket instaler yang terunduh tersebut di dalam perangkat Android Anda.
 3. Apabila muncul peringatan keamanan sistem, mohon izinkan penginstalan dari **Sumber Tidak Dikenal (Unknown Sources)** pada pengaturan keamanan ponsel.
 4. Lanjutkan instruksi di layar instalasi, tunggu sampai jadi, dan aplikasi siap digunakan!
